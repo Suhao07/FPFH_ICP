@@ -30,8 +30,11 @@ public:
     // 计算物体相对于相机的相对位姿
     Eigen::Matrix4f alignPointClouds(pcl::PointCloud<pcl::PointXYZ>::Ptr source_cloud,
                                      pcl::PointCloud<pcl::PointXYZ>::Ptr target_cloud);
-    
-   
+    // 新增函数：在相机点云中匹配物体点云
+    pcl::PointCloud<pcl::PointXYZ>::Ptr matchObject(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud,
+                                                pcl::PointCloud<pcl::FPFHSignature33>::Ptr input_features,
+                                                pcl::PointCloud<pcl::FPFHSignature33>::Ptr target_features);
+
     float search_radius;
     int max_iterations;
     float max_correspondence_distance;
