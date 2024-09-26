@@ -33,3 +33,8 @@ include_directories(${PCL_INCLUDE_DIRS} include)
 
 add_executable(point_cloud_alignment src/PointCloudAlignment.cpp src/main.cpp)
 target_link_libraries(point_cloud_alignment ${PCL_LIBRARIES})
+
+
+
+# 添加调试信息标志
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -g")

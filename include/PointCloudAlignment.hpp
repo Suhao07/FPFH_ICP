@@ -13,6 +13,7 @@ class PointCloudAlignment {
 public:
    
     PointCloudAlignment(float search_radius = 0.05, int max_iterations = 50000, float max_correspondence_distance = 0.01);
+    pcl::PointCloud<pcl::PointXYZ>::Ptr preprocessPointCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud) ;
     
     pcl::PointCloud<pcl::FPFHSignature33>::Ptr extractFPFH(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, pcl::PointCloud<pcl::Normal>::Ptr normals);
     
@@ -29,15 +30,20 @@ public:
     
     // 计算物体相对于相机的相对位姿
     Eigen::Matrix4f alignPointClouds(pcl::PointCloud<pcl::PointXYZ>::Ptr source_cloud,
-                                     pcl::PointCloud<pcl::PointXYZ>::Ptr target_cloud);
+                                     pcl::PointCloud<pcl::PointXYZ>::Ptr target_cloud,
+                                      const std::string& output_filename);
     // 新增函数：在相机点云中匹配物体点云
-    pcl::PointCloud<pcl::PointXYZ>::Ptr matchObject(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud,
-                                                pcl::PointCloud<pcl::FPFHSignature33>::Ptr input_features,
-                                                pcl::PointCloud<pcl::FPFHSignature33>::Ptr target_features);
+    // pcl::PointCloud<pcl::PointXYZ>::Ptr matchObject(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud,
+    //                                             pcl::PointCloud<pcl::FPFHSignature33>::Ptr input_features,
+    //                                             pcl::PointCloud<pcl::FPFHSignature33>::Ptr target_features);
+    void visualizePointClouds(pcl::PointCloud<pcl::PointXYZ>::Ptr source_cloud,
+                                                pcl::PointCloud<pcl::PointXYZ>::Ptr target_cloud);
 
     float search_radius;
     int max_iterations;
     float max_correspondence_distance;
+    Eigen::Matrix4f transformation_matrix;
+
 };
 
 #endif
